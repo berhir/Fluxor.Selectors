@@ -1,4 +1,4 @@
-﻿namespace Fluxor.Selectors.MauiDemo.Store;
+﻿namespace Fluxor.Selectors.Demo.Store.Counter2;
 
 [FeatureState]
 public record Counter2State

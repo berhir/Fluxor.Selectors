@@ -1,4 +1,4 @@
-﻿namespace Fluxor.Selectors.MauiDemo.Store;
+﻿namespace Fluxor.Selectors.Demo.Store.Counter2;
 
 public static class Counter2Actions
 {

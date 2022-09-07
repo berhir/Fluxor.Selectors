@@ -16,43 +16,27 @@
                 HorizontalOptions="Center" />
 
             <Label
-                Text="Hello, World!"
+                Text="Fluxor.Selectors Demo"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="32"
                 HorizontalOptions="Center" />
 
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
             <Button
-                x:Name="CounterBtn"
-                Text="Click me"
+                x:Name="Counter1Btn"
+                Text="{Binding Count1Text.Value}"
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounter1Clicked"
                 HorizontalOptions="Center" />
 
-            <Label
-                Text="{Binding EvenOrNullCount1.Value, StringFormat='Even or null: {0}'}"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
             <Button
                 x:Name="Counter2Btn"
-                Text="Click me"
+                Text="{Binding Count2Text.Value}"
+                SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounter2Clicked"
                 HorizontalOptions="Center" />
 
             <Label
-                Text="{Binding Count2.Value, StringFormat='Count 2: {0}'}"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="{Binding AllEven.Value, StringFormat='All even: {0}'}"
+                Text="{Binding Sum.Value, StringFormat='The sum is: {0}'}"
                 FontSize="18"
                 HorizontalOptions="Center" />
 

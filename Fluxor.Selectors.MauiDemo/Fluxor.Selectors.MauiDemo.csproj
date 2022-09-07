@@ -49,6 +49,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Fluxor.Selectors.Demo\Fluxor.Selectors.Demo.csproj" />
 	  <ProjectReference Include="..\Fluxor.Selectors\Fluxor.Selectors.csproj" />
 	</ItemGroup>
 

@@ -17,7 +17,7 @@ public static class MauiProgram
 
         builder.Services.AddFluxor(o =>
 		{
-			o.ScanAssemblies(typeof(MauiProgram).Assembly);
+			o.ScanAssemblies(typeof(Demo.Demo).Assembly);
 			o.WithLifetime(StoreLifetime.Singleton);
 		});
 
