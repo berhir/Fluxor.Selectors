@@ -1,6 +1,6 @@
 ﻿namespace Fluxor.Selectors;
 
-public interface IStateSelector<TResult>
+public interface ISelector<TResult>
 {
     TResult Select(IStore state);
 }

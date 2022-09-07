@@ -10,23 +10,27 @@ public interface ISelectorSubscription<T> : IState<T>, INotifyPropertyChanged, I
     void Pause();
 
     void Resume();
-
-    void AddValueChangedHandler(Action<T> handler);
 }
 
 public class SelectorSubscription<T> : ISelectorSubscription<T>
 {
     private readonly IStore _store;
-    private readonly IStateSelector<T> _selector;
+    private readonly ISelector<T> _selector;
+    private readonly Action<T>? _valueChangedHandler;
     private readonly List<IFeature> _features;
-    private readonly List<Action<T>> _valueChangedHandlers = new();
     private bool _isPaused = false;
     private T _lastValue;
 
-    public SelectorSubscription(IStore store, IStateSelector<T> selector)
+    public SelectorSubscription(IStore store, ISelector<T> selector)
+        : this(store, selector, null)
+    {
+    }
+
+    public SelectorSubscription(IStore store, ISelector<T> selector, Action<T>? valueChangedHandler)
     {
         _store = store;
         _selector = selector;
+        _valueChangedHandler = valueChangedHandler;
 
         // IStore has no event, so subscribe to all feature changes.
         // Hold a list of all features we subscribed to.
@@ -34,7 +38,7 @@ public class SelectorSubscription<T> : ISelectorSubscription<T>
         _features.ForEach(f => f.StateChanged += Feature_StateChanged);
 
         // create a wrapper selector to save the last value. the projector function will be called only if the value changed.
-        _selector = StateSelectorFactory.CreateSelector(selector, newVal =>
+        _selector = SelectorFactory.CreateSelector(selector, newVal =>
         {
             OnValueChanged(newVal);
             return newVal;
@@ -68,11 +72,6 @@ public class SelectorSubscription<T> : ISelectorSubscription<T>
         _features.ForEach(f => f.StateChanged -= Feature_StateChanged);
     }
 
-    public void AddValueChangedHandler(Action<T> handler)
-    {
-        _valueChangedHandlers.Add(handler);
-    }
-
     public void Pause()
     {
         _isPaused = true;
@@ -89,6 +88,6 @@ public class SelectorSubscription<T> : ISelectorSubscription<T>
         _lastValue = newVal;
         StateChanged?.Invoke(this, new EventArgs());
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Value)));
-        _valueChangedHandlers.ForEach(h => h.Invoke(newVal));
+        _valueChangedHandler?.Invoke(newVal);
     }
 }
