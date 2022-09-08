@@ -25,25 +25,17 @@ public class MemoizedSelector<TIn1, TResult> : ISelector<TResult>
 
     public TResult Select(IStore state)
     {
-        return Select(state, out _);
-    }
-
-    public TResult Select(IStore state, out bool resultHasChanged)
-    {
-        resultHasChanged = false;
-
         if (UpdateInputResults(state) || LastResult == null)
         {
             var newResult = CallProjectorFunc(state);
 
             if (LastResult == null)
             {
-                resultHasChanged = true;
                 LastResult = new(newResult);
                 return newResult;
             }
 
-            resultHasChanged = !DefaultValueEquals(newResult, LastResult.Result);
+            var resultHasChanged = !DefaultValueEquals(newResult, LastResult.Result);
 
             if (resultHasChanged)
             {
@@ -73,23 +65,13 @@ public class MemoizedSelector<TIn1, TResult> : ISelector<TResult>
 
     protected virtual bool UpdateInputResults(IStore state)
     {
-        var newArg1 = _inS1.Select(state);
-
-        if (InS1LastResult == null)
+        var result = UpdateInputResult(state, _inS1, InS1LastResult, out var hasChanges);
+        if (hasChanges)
         {
-            InS1LastResult = new(newArg1);
-            return true;
+            InS1LastResult = result;
         }
 
-        var arg1Changed = !DefaultValueEquals(newArg1, InS1LastResult.Result);
-
-        if (!arg1Changed)
-        {
-            return false;
-        }
-
-        InS1LastResult.Result = newArg1;
-        return true;
+        return hasChanges;
     }
 
     protected static SelectorResult<T> UpdateInputResult<T>(IStore state, ISelector<T> selector, SelectorResult<T>? lastResult, out bool hasChanges)
