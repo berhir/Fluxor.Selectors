@@ -86,7 +86,7 @@ public class SelectorSubscription<T> : ISelectorSubscription<T>
     private void OnValueChanged(T newVal)
     {
         _lastValue = newVal;
-        StateChanged?.Invoke(this, new EventArgs());
+        StateChanged?.Invoke(this, EventArgs.Empty);
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Value)));
         _valueChangedHandler?.Invoke(newVal);
     }

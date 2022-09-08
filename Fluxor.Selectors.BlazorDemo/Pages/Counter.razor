@@ -1,0 +1,54 @@
+﻿@using Fluxor.Selectors.Demo.Store.Counter1
+@using Fluxor.Selectors.Demo.Store.Counter2
+@using System.Reflection
+@page "/counter"
+@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+@inject IStore Store
+@inject IDispatcher Dispatcher
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Fluxor.Selectors Demo</h1>
+
+<button class="btn btn-primary" @onclick="IncrementCount1">@Count1Text.Value</button>
+
+<button class="btn btn-primary" @onclick="IncrementCount2">@Count2Text.Value</button>
+
+<p role="status">Sum is: @Sum.Value</p>
+
+@code {
+    private static readonly ISelector<int> SelectSum = SelectorFactory.CreateSelector(Counter1Selectors.SelectCount, Counter2Selectors.SelectCount, (count1, count2) => count1 + count2);
+
+    // use properties to automatically subscribe to state changed events
+    private ISelectorSubscription<string> Count1Text { get; set; } = default!;
+    private ISelectorSubscription<string> Count2Text { get; set; } = default!;
+    private ISelectorSubscription<int> Sum { get; set; } = default!;
+
+    protected override void OnInitialized()
+    {
+        // subscribe before calling 'base.OnInitialized()' to automatically subscribe to state changed events
+        Count1Text = Store.SubscribeSelector(Counter1Selectors.SelectCountText);
+        Count2Text = Store.SubscribeSelector(Counter2Selectors.SelectCountText);
+        Sum = Store.SubscribeSelector(SelectSum);
+
+        base.OnInitialized();
+    }
+
+    private void IncrementCount1()
+    {
+        Dispatcher.Dispatch(new Counter1Actions.IncrementCounterAction());
+    }
+
+    private void IncrementCount2()
+    {
+        Dispatcher.Dispatch(new Counter2Actions.IncrementCounterAction());
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+        Count1Text.Dispose();
+        Count2Text.Dispose();
+        Sum.Dispose();
+    }
+}
