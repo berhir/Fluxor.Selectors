@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Fluxor.Selectors\Fluxor.Selectors.csproj" />
+    <ProjectReference Include="..\..\src\Fluxor.Selectors\Fluxor.Selectors.csproj" />
   </ItemGroup>
 
 </Project>
