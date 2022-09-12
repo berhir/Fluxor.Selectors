@@ -10,11 +10,17 @@ public static class Counter2Selectors
     {
         string result = string.Empty;
         if (count == 0)
+        {
             result += "Click me";
+        }
         else if (count == 1)
+        {
             result += $"Clicked {count} time";
+        }
         else
+        {
             result += $"Clicked {count} times";
+        }
 
         result += $" (Updated at {DateTime.Now})";
         return result;

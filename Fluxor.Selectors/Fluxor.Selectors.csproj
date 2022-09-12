@@ -1,13 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
-		<LangVersion>10</LangVersion>
-		<Nullable>enable</Nullable>
-	</PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>10</LangVersion>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+  </PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Fluxor" Version="5.4.0" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Fluxor" Version="5.4.0" />
+  </ItemGroup>
 
 </Project>

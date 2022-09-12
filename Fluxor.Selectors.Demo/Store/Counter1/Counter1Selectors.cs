@@ -1,4 +1,4 @@
-﻿namespace Fluxor.Selectors.Demo.Store.Counter1;
+namespace Fluxor.Selectors.Demo.Store.Counter1;
 
 public static class Counter1Selectors
 {
@@ -10,11 +10,17 @@ public static class Counter1Selectors
     {
         string result = string.Empty;
         if (count == 0)
+        {
             result += "Click me";
+        }
         else if (count == 1)
+        {
             result += $"Clicked {count} time";
+        }
         else
+        {
             result += $"Clicked {count} times";
+        }
 
         result += $" (Updated at {DateTime.Now})";
         return result;

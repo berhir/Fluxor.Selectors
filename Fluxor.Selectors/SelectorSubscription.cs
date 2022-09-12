@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -65,6 +65,7 @@ public class SelectorSubscription<T> : ISelectorSubscription<T>
     public T Value => _lastValue;
 
     public event EventHandler? StateChanged;
+
     public event PropertyChangedEventHandler? PropertyChanged;
 
     public void Dispose()

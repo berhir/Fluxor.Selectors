@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Fluxor.Selectors;
 
@@ -11,6 +11,33 @@ public class MemoizedSelector<TIn1, TResult> : ISelector<TResult>
     private ISelector<TIn1> _inS1;
 
     private Func<TIn1, TResult>? _projectorFunc;
+
+    protected static SelectorResult<T> UpdateInputResult<T>(IStore state, ISelector<T> selector, SelectorResult<T>? lastResult, out bool hasChanges)
+    {
+        hasChanges = false;
+        var newSelectorResult = selector.Select(state);
+
+        if (lastResult == null)
+        {
+            hasChanges = true;
+            return new(newSelectorResult);
+        }
+
+        var selectorResultChanged = !DefaultValueEquals(newSelectorResult, lastResult.Result);
+
+        if (!selectorResultChanged)
+        {
+            return lastResult;
+        }
+
+        hasChanges = true;
+        return new(newSelectorResult);
+    }
+
+    protected static bool DefaultValueEquals<T>(T x, T y) =>
+        object.ReferenceEquals(x, y)
+        || (x as IEquatable<T>)?.Equals(y) == true
+        || object.Equals(x, y);
 
     public MemoizedSelector(ISelector<TIn1> inS1, Func<TIn1, TResult> projectorFunc)
         : this(inS1)
@@ -73,33 +100,6 @@ public class MemoizedSelector<TIn1, TResult> : ISelector<TResult>
 
         return hasChanges;
     }
-
-    protected static SelectorResult<T> UpdateInputResult<T>(IStore state, ISelector<T> selector, SelectorResult<T>? lastResult, out bool hasChanges)
-    {
-        hasChanges = false;
-        var newSelectorResult = selector.Select(state);
-
-        if (lastResult == null)
-        {
-            hasChanges = true;
-            return new(newSelectorResult);
-        }
-
-        var selectorResultChanged = !DefaultValueEquals(newSelectorResult, lastResult.Result);
-
-        if (!selectorResultChanged)
-        {
-            return lastResult;
-        }
-
-        hasChanges = true;
-        return new(newSelectorResult);
-    }
-
-    protected static bool DefaultValueEquals<T>(T x, T y) =>
-        object.ReferenceEquals(x, y)
-        || (x as IEquatable<T>)?.Equals(y) == true
-        || object.Equals(x, y);
 }
 
 public class MemoizedSelector<TIn1, TIn2, TResult> : MemoizedSelector<TIn1, TResult>

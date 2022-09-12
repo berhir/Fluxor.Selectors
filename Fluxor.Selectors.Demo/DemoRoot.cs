@@ -1,7 +1,6 @@
-﻿namespace Fluxor.Selectors.Demo
+namespace Fluxor.Selectors.Demo
 {
     public static class DemoRoot
     {
-
     }
 }

@@ -7,13 +7,22 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fluxor.Selectors.MauiDemo",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fluxor.Selectors", "Fluxor.Selectors\Fluxor.Selectors.csproj", "{A5506A13-85E7-4DB9-96A6-328907A08924}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluxor.Selectors.Demo", "Fluxor.Selectors.Demo\Fluxor.Selectors.Demo.csproj", "{8173B510-7BD3-423A-9E2F-3C72D33163C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fluxor.Selectors.Demo", "Fluxor.Selectors.Demo\Fluxor.Selectors.Demo.csproj", "{8173B510-7BD3-423A-9E2F-3C72D33163C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluxor.Selectors.BlazorDemo", "Fluxor.Selectors.BlazorDemo\Fluxor.Selectors.BlazorDemo.csproj", "{784DCC68-D5E1-40AC-ACC1-597F3C974C50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fluxor.Selectors.BlazorDemo", "Fluxor.Selectors.BlazorDemo\Fluxor.Selectors.BlazorDemo.csproj", "{784DCC68-D5E1-40AC-ACC1-597F3C974C50}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9112643B-EB8A-4EFA-BB3C-A04637630B52}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		Analyzers.ruleset = Analyzers.ruleset
+		global.json = global.json
+		LICENSE.txt = LICENSE.txt
+		NuGet.Config = NuGet.Config
 		README.md = README.md
+		StyleCop.json = StyleCop.json
 	EndProjectSection
 EndProject
 Global

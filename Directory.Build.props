@@ -1,0 +1,34 @@
+<Project>
+  <PropertyGroup>
+    <!-- Specify explicit version to ensure everyone in the team is using the same language version -->
+    <LangVersion>10.0</LangVersion>
+    <!--<NoWarn>$(NoWarn);1591;AD0001</NoWarn>-->
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <!-- Treat warnings as errors only in release configuration. This offers higher flexibility while developing. -->
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+  <PropertyGroup>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/berhir/Fluxor.Selectors</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/berhir/Fluxor.Selectors</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Product>Fluxor.Selectors</Product>
+    <Authors>Bernd Hirschmann</Authors>
+    <Company>Guid.New GmbH</Company>
+    <Version>1.0.0-preview.1</Version>
+  </PropertyGroup>
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)Analyzers.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)StyleCop.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.354">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+</Project>
