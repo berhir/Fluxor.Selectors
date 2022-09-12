@@ -17,6 +17,7 @@
     <Product>Fluxor.Selectors</Product>
     <Authors>Bernd Hirschmann</Authors>
     <Company>Guid.New GmbH</Company>
+    <Description>Memoized selectors for Fluxor</Description>
     <Version>1.0.0-preview.1</Version>
   </PropertyGroup>
   <PropertyGroup>
