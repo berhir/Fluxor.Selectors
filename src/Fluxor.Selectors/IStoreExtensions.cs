@@ -1,6 +1,7 @@
-﻿using System;
+using Fluxor.Selectors;
+using System;
 
-namespace Fluxor.Selectors;
+namespace Fluxor;
 
 public static class IStoreExtensions
 {
